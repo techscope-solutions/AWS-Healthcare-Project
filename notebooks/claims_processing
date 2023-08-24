@@ -1,0 +1,44 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load the claims dataset from the 'data-sources' directory
+claims_data = pd.read_csv('data-sources/claims_data.csv')
+claims_data.head()
+claims_data.info()
+claims_data.describe()
+sns.histplot(claims_data['ClaimAmount'], kde=True)
+plt.title('Distribution of Claim Amounts')
+plt.show()
+
+top_providers = claims_data['ProviderName'].value_counts().head(10)
+top_providers.plot(kind='bar')
+plt.title('Top 10 Providers by Number of Claims')
+plt.xlabel('Provider Name')
+plt.ylabel('Number of Claims')
+plt.show()
+
+avg_claim_per_provider = claims_data.groupby('ProviderName')['ClaimAmount'].mean().sort_values(ascending=False)
+avg_claim_per_provider.plot(kind='bar', figsize=(12,6))
+plt.title('Average Claim Amount per Provider')
+plt.ylabel('Average Claim Amount')
+plt.show()
+
+claims_data['ClaimDate'] = pd.to_datetime(claims_data['ClaimDate'])
+claims_data.set_index('ClaimDate', inplace=True)
+monthly_claims = claims_data.resample('M').size()
+monthly_claims.plot()
+plt.title('Monthly Number of Claims')
+plt.ylabel('Number of Claims')
+plt.show()
+
+claims_data.groupby(claims_data.index.month).size().plot(kind='bar')
+plt.title('Monthly Distribution of Claims')
+plt.xlabel('Month')
+plt.ylabel('Number of Claims')
+plt.show()
+
+claim_type_dist = claims_data['ClaimType'].value_counts()
+claim_type_dist.plot(kind='pie', autopct='%1.1f%%', startangle=90, figsize=(10, 6))
+plt.title('Distribution of Claim Types')
+plt.show()
