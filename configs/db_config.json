@@ -1,0 +1,19 @@
+{
+    "postgresql": {
+        "host": "your_db_host",
+        "port": "your_db_port",
+        "dbname": "your_dbname",
+        "user": "your_db_user",
+        "password": "your_db_password",
+        "driver": "org.postgresql.Driver"
+    },
+    "mysql": {
+        "host": "your_db_host",
+        "port": "your_db_port",
+        "dbname": "your_dbname",
+        "user": "your_db_user",
+        "password": "your_db_password",
+        "driver": "com.mysql.jdbc.Driver"
+    }
+    // You can add other database configurations similarly
+}
