@@ -1,0 +1,42 @@
+import requests
+import quandl
+from bs4 import BeautifulSoup
+
+def fetch_from_uci():
+    url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
+    response = requests.get(url)
+    with open("data-sources/iris_dataset.csv", "wb") as f:
+        f.write(response.content)
+    print("UCI Iris dataset fetched successfully.")
+
+def fetch_from_quandl():
+    # Set your API key if you have one (some datasets don't need one)
+    # quandl.ApiConfig.api_key = 'YOUR_API_KEY'
+    data = quandl.get("WIKI/AAPL")  # Fetch Apple stock data from the Wiki EOD Stock Prices dataset
+    data.to_csv("data-sources/apple_stock_data.csv")
+    print("Quandl Apple stock data fetched successfully.")
+
+def fetch_from_datagov():
+    url = "https://data.seattle.gov/resource/tmmm-ytt6.csv?$limit=10000"  # A sample dataset URL
+    response = requests.get(url)
+    with open("data-sources/seattle_data.csv", "wb") as f:
+        f.write(response.content)
+    print("Data.gov Seattle data fetched successfully.")
+
+def scrape_web_content():
+    url = "https://example.com/some-webpage"
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'html.parser')
+
+    # This is a very generic example; you'll need to specify what data to extract based on the website's structure
+    data = [element.text for element in soup.find_all('tagname')]
+
+    with open("data-sources/web_scraped_data.txt", "w") as f:
+        f.write("\n".join(data))
+    print("Web content scraped successfully.")
+
+if __name__ == "__main__":
+    fetch_from_uci()
+    fetch_from_quandl()
+    fetch_from_datagov()
+    scrape_web_content()
