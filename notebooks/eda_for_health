@@ -1,0 +1,12 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+data = pd.read_csv('data-sources/healthcare_data.csv')
+
+# Basic statistics
+print(data.describe())
+
+# Distribution of age in the dataset
+data['Age'].hist()
+plt.show()
