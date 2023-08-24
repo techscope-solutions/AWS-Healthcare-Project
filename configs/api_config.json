@@ -1,0 +1,23 @@
+{
+    "patient_data_api": {
+        "endpoint": "https://api.example.com/patient-data",
+        "headers": {
+            "Authorization": "Bearer YOUR_API_TOKEN",
+            "Content-Type": "application/json"
+        },
+        "params": {
+            // Any query parameters you might need for the API call
+        }
+    },
+    "financial_data_api": {
+        "endpoint": "https://api.example.com/financial-data",
+        "headers": {
+            "Authorization": "Bearer YOUR_API_TOKEN",
+            "Content-Type": "application/json"
+        },
+        "params": {
+            // Any query parameters you might need for the API call
+        }
+    }
+    // You can add other API configurations similarly
+}
